@@ -10,6 +10,8 @@ public interface CardService {
 
     Card findCardById(int id);
 
+    Card findCardByName(String name);
+
     void save(Card card);
 
     void delete (Card card);

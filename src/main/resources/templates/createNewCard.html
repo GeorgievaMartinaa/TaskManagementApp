@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Card</title>
+</head>
+<body>
+
+<form th:action="@{/cards/process}" th:object="${card}" th:method="POST">
+
+    <div class="mb-3">
+        <label for="name" class="form-label">Card name</label>
+        <input type="text" class="form-control" id="name" th:field="*{name}">
+    </div>
+    <div class="mb-3">
+        <label for="notes" class="form-label">Card notes</label>
+        <input type="text" class="form-control" id="notes" th:field="*{notes}">
+    </div>
+
+    <input type="submit" class="btn btn-primary" value="Submit">
+
+</form>
+
+</body>
+</html>

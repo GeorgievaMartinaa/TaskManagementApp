@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Card Details</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+
+<h2 th:text="${card.name}"></h2>
+<ul>
+    <li th:each="task: ${tasks}">
+        <span th:text="${task.name} + ' - ' + ${task.description}"></span>
+        <input type="checkbox"
+               name="taskDone"
+               th:checked="${task.done}"
+               th:attr="data-id=${task.internalKey}" onchange="updateTaskDone(this)">
+    </li>
+</ul>
+
+<h3> Card Notes</h3>
+<p th:text="${card.notes}"></p>
+
+<a th:href="@{/home}" class="btn">Go Home</a>
+<button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#modalForm">Add new task</button>
+
+<div class="modal fade" id="modalForm" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+               <form th:object="${task}" th:method="POST" th:action="@{/cards/newTask}">
+                   <label for="taskName" class="form-label">Task Name</label>
+                   <input type="text" class="form-control" th:field="*{name}" id="taskName">
+                   <label for="taskDesc" class="form-label">Task Description</label>
+                   <input type="text" class="form-control" th:field="*{description}" id="taskDesc">
+                   <input type="hidden" th:field="*{cardId}">
+
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/JS/Task.js"></script>
+</body>
+</html>

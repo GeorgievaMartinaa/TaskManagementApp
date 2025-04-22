@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:object="${task}" th:action="@{/tasks/process}" th:method="POST">
+
+    <div class="mb-3">
+        <label for="name" class="form-label"> Task Name</label>
+        <input type="text" th:field="*{name}" class="form-control" id="name" >
+    </div>
+    <div class="mb-3">
+        <label for="desc" class="form-label">Task description</label>
+        <input type="text" th:field="*{description}" class="form-control" id="desc">
+    </div>
+
+    <div class="">
+        <label for="cardSelection" class="form-label">Select card</label>
+        <select id="cardSelection" th:field="*{cardId}" class="form-select">
+            <option th:each="card: ${cards}" th:text="${card.name}" th:value="${card.internalKey}"></option>
+        </select>
+    </div>
+
+    <input type="submit" class="btn btn-primary" value="Submit">
+</form>
+
+</body>
+</html>

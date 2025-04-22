@@ -5,9 +5,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -17,12 +20,18 @@ public class Card {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
-    String name;
-    String notes;
+    private int id;
 
-    public Card(String name, String notes) {
+    private String name;
+
+    @OneToMany(mappedBy = "card")
+    private  List<Task> tasks;
+
+    private String notes;
+
+    public Card(String name, List<Task> tasks, String notes) {
         this.name = name;
+        this.tasks = tasks;
         this.notes = notes;
     }
 }
