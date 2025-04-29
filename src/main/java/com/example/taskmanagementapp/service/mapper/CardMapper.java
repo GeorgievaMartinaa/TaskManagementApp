@@ -5,6 +5,7 @@ import com.example.taskmanagementapp.model.DTO.CardDTO;
 import com.example.taskmanagementapp.model.Task;
 import org.springframework.stereotype.Component;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,6 +21,7 @@ public class CardMapper {
 
 
         List<String>taskNames = card.getTasks().stream().map(Task::getName).collect(Collectors.toList());
+        Collections.reverse(taskNames);
 
         cardDTO.setTaskNames(taskNames);
 

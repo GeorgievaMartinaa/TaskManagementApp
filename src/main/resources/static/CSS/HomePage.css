@@ -1,0 +1,97 @@
+.content{
+    height: 100vh;
+}
+
+.swiper {
+    width: 100%;
+}
+.swiper-slide {
+    width: auto; /* или остави го на default */
+}
+
+.new-card{
+    width: 25%;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    padding: 5%;
+    align-content: center;
+    text-align: center;
+}
+
+.card-list{
+    display: flex;
+    flex-direction: row;
+}
+
+.header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.delete-icon{
+    width: 25px;
+    height: 25px;
+}
+
+.error{
+    color: red;
+}
+
+.content{
+    background: #f7fbfc;
+}
+
+.card{
+    background: lavender ;
+}
+
+.card-body{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+#card-tasks{
+    height: 300px;
+}
+.altText{
+    display: none;
+}
+ .add-card-icon{
+     width: 70px;
+     height: 70px;
+     opacity: 60%;
+ }
+
+ .add-card-icon:hover{
+     opacity: 100%;
+ }
+
+ #backlog-btns{
+     display: flex;
+     flex-direction: row;
+ }
+
+#backlog-btns a{
+    width: 50%;
+}
+
+@media  (max-width: 640px) {
+    .card-list{
+        flex-direction: column-reverse;
+    }
+    .new-card{
+        width: 100%;
+    }
+    #card-tasks{
+        height: 250px;
+    }
+    .altText{
+        display: inline-block;
+    }
+    .add-card-icon{
+        display: none;
+    }
+
+}

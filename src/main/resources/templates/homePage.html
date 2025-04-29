@@ -7,47 +7,71 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
+<!--    swiper.js-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!--    -->
+    <link rel="stylesheet" href="/CSS/HomePage.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+<div class="content">
+    <div class="card-list mb-2">
+        <div class="new-card">
+            <a th:href="@{/cards/create}"><img class="add-card-icon" src="/svg/add-square-svgrepo-com-blue.svg"> <span class="altText">Create new card</span></a>
+        </div>
+        <div class="swiper">
+            <div class="swiper-wrapper">
+                <div class="mx-1 card swiper-slide" th:each="card: ${cardList}">
+                    <div class="card-body">
+                        <div class="header">
+                            <h5 class="card-title" th:text="${card.name}"></h5>
+                            <form th:action="@{cards/{id}/delete(id=${card.internalKey})}" th:method="POST">
+                                <input class="delete-icon" type="image" name="submit" src="/svg/cancel-close-delete-svgrepo-com.svg">
+                            </form>
+                        </div>
 
-<div class="container d-flex flex-row">
-    <div class="card">
-        <a th:href="@{/cards/create}">Create new card</a>
-    </div>
-    <div class="container d-flex flex-row">
-        <div class="mx-1 card" th:each="card: ${cardList}">
-            <div class="card-body">
-                <h5 class="card-title" th:text="${card.name}"></h5>
-                <ul>
-                    <li th:each="taskName: ${card.taskNames}" th:text="${taskName}">
+                        <ul id="card-tasks">
+                            <li th:each="taskName: ${card.taskNames}" th:text="${taskName}">
 
-                    </li>
-                </ul>
-                <a th:href="@{cards/open(id=${card.internalKey})}" class="btn">Open Card</a>
-                <form th:action="@{cards/{id}/delete(id=${card.internalKey})}" th:method="POST">
-                    <button type="submit" class="btn">Delete Card</button>
-                </form>
+                            </li>
+                        </ul>
+
+                        <a th:href="@{cards/open(id=${card.internalKey})}" class="btn btn-outline-primary">Open Card</a>
+
+                    </div>
+                </div>
             </div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
         </div>
     </div>
-</div>
 
-<div>
     <div>
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title" th:text="${backlogCard.name}"></h5>
-                <ul>
-                    <li th:each="taskName : ${backlogCard.taskNames}" th:text="${taskName}">
+        <div>
+            <div class="card">
+                <div class="card-body">
+                    <div>
+                        <h5 class="card-title" th:text="${backlogCard.name}"></h5>
+                        <ul>
+                            <li th:each="taskName : ${backlogCard.taskNames}" th:text="${taskName}">
 
-                    </li>
-                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="backlog-btns">
+                    <a th:href="@{cards/open(id=${backlogCard.internalKey})}" class=" btn btn-outline-primary">Open
+                        Card</a>
+                    <a th:href="@{/tasks/new}" class="btn btn-outline-success">Create new task</a>
+                </div>
             </div>
-            <a th:href="@{cards/open(id=${backlogCard.internalKey})}" class="btn">Open Card</a>
         </div>
-    </div>
 
-    <a th:href="@{/tasks/new}">Create new task</a>
+    </div>
 </div>
+
+<script src="/JS/HomePage.js"></script>
+
 </body>
 </html>

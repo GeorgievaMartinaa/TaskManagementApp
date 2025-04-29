@@ -9,8 +9,10 @@ import com.example.taskmanagementapp.service.CardService;
 import com.example.taskmanagementapp.service.TaskService;
 import com.example.taskmanagementapp.service.mapper.CardMapper;
 import com.example.taskmanagementapp.service.mapper.TaskMapper;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -88,14 +90,19 @@ public class CardController {
     }
 
     @PostMapping("/process")
-    public String proccessCardForm(@ModelAttribute("card") CardDTO cardDTO, Model model){
-        List<Task> tasks = new ArrayList<>();
+    public String proccessCardForm(@Valid @ModelAttribute("card") CardDTO cardDTO, BindingResult bindingResult){
 
-        Card card = cardMapper.toCard(cardDTO, tasks);
+        if(bindingResult.hasErrors()){
+            return "createNewCard";
+        }else {
+            List<Task> tasks = new ArrayList<>();
 
-        cardService.save(card);
+            Card card = cardMapper.toCard(cardDTO, tasks);
 
-        return "redirect:/home";
+            cardService.save(card);
+
+            return "redirect:/home";
+        }
     }
 
     @PostMapping("/newTask")
