@@ -17,7 +17,7 @@ public class CardMapper {
 
         cardDTO.setInternalKey(card.getId());
         cardDTO.setName(card.getName());
-        cardDTO.setNotes(cardDTO.getNotes());
+        cardDTO.setNotes(card.getNotes());
 
 
         List<String>taskNames = card.getTasks().stream().map(Task::getName).collect(Collectors.toList());
